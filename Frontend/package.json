@@ -1,0 +1,48 @@
+{
+  "name": "projectchapteroglauncher",
+  "version": "2.0.0",
+  "description": "Game Launcher for Project Chapter OG",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager . ProjectChapterOG --platform=win32 --arch=x64 --out=dist",
+    "build": "electron-builder"
+  },
+  "author": "Project OG",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.1.0",
+    "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9"
+  },
+  "build": {
+    "appId": "projectchapterog",
+    "productName": "ProjectChapterOG",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "extraFiles": [
+      {
+        "from": "files",
+        "to": "resources/files",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "./images/PROJECTOG.png"
+    }
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "edge-js": "^23.1.4",
+    "electron-edge-js": "^34.0.0",
+    "electron-log": "^5.1.5",
+    "https": "^1.0.0",
+    "os": "^0.1.2"
+  }
+}

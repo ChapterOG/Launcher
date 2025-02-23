@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Chapter OG Launcher</title>
+  
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --primary-hover: #0056b3;
+      --font-color: #333;
+      --bg-color: #f0f2f5;
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --input-border: #ccc;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: url('./images/ch3-min.png') no-repeat center center/cover;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      position: relative;
+    }
+
+    .login-screen {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      width: 300px;
+      margin: auto;
+      position: relative;
+      left: -200px;
+      z-index: 1;
+    }
+
+    .login-screen h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: var(--font-color);
+    }
+
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .login-screen button {
+      padding: 10px;
+      font-size: 16px;
+      color: #fff;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-screen button:hover {
+      background-color: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+
+<div id="check-screen" style="display: block;" class="login-screen">
+  <h2 id="checkversiontext">Checking Launcher Version</h2>
+  <div class="spinner"></div>
+</div>
+
+<div id="login-screen" style="display: none;" class="login-screen">
+  <h2>Please Authenticate your Discord Account to Continue!</h2>
+  <button id="authbutton" href="">Get Started</button>
+</div>
+
+<script>
+ let uptodate = false;
+
+document.addEventListener('DOMContentLoaded', async function() {
+  const url = "https://raw.githubusercontent.com/iluvjoshallen/ProjectOG/main/version.txt";
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const text = await response.text();
+    const currentVersion = "2.1";
+
+    if (text.trim() === currentVersion) {
+      console.log("Version up to date!");
+      uptodate = true;
+
+      setTimeout(() => {
+        document.getElementById('login-screen').style.display = "block";
+        document.getElementById('check-screen').style.display = "none";
+      }, 2000);
+    } else {
+      document.getElementById('checkversiontext').textContent = `Incorrect launcher version! Please upgrade to the latest version in our discord server! https://chapterog.com/`;
+      closeAppAndRunInstaller();
+    }
+
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
+function closeAppAndRunInstaller() {
+  window.electron.closeApp();
+  window.electron.runInstaller();
+}
+
+  document.getElementById('authbutton').addEventListener('click', function() {
+    document.getElementById('authbutton').textContent = 'Waiting for Callback...';
+    window.electron.openDiscordExternal();
+  });
+
+  window.electron.onAuthId((authId) => {
+    if (uptodate == true) {
+          console.log("Recieved!")
+      window.location.href = './main.html'
+    }
+  });
+
+  document.getElementById('openbutton').addEventListener('click', function() {
+    window.electron.openshell();
+
+    console.log("opening game")
+  });
+
+  window.electron.openshellresponse((event, response) => {
+    console.log(response)
+    console.log(event)
+    console.log(response.message);
+  });
+
+  function closeApp() {
+  window.close();
+}
+</script>
+</body>
+</html>

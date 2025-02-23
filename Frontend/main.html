@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Chapter OG Launcher</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: rgb(44, 44, 44);
+            display: flex;
+        }
+        .sidebar {
+            background-color: rgba(30, 29, 29, 0.897);
+            color: white;
+            padding: 20px;
+            width: 190px;
+            text-align: center;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .content {
+            margin-left: 30%;
+            padding: 20px;
+            color: white;
+            flex-grow: 1;
+        }
+        .news-area {
+            background-color: #9d3d88;
+            padding: 1px;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .news-area p {
+            margin-left: 20px;
+        }
+        .news-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #eaeaea;
+            border-radius: 5px;
+        }
+        .play {
+            margin-bottom: 20px;
+        }
+        .progress-bar-container {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+        .download-section {
+            margin-top: 40px;
+        }
+        .download-section button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @keyframes pageSwitch {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            margin-left: 30%;
+            padding: 20px;
+            color: white;
+            flex-grow: 1;
+            animation: pageSwitch 0.3s ease-in-out;
+        }
+    </style>
+
+    <script>
+        function Logout() {
+            let confirmLogout = confirm('Are you sure you want to log out?');
+            if (confirmLogout) {
+                window.electron.logoutUser();
+
+                window.location.href = './index.html'
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Chapter OG</h1>
+        <a href="./main.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="./other.html"><i class="fa-solid fa-book"></i> Other</a>
+        <a onclick="Logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div>
+
+    <div class="content">
+        <div class="news-area">
+            <p>Thank you for choosing Project Chapter OG!</p>
+        </div>
+
+        <div class="play">
+            <h1>Play</h1>
+            <div style="position: relative; display: inline-block; border: 1px solid white; border-radius: 30px;">
+                <img style="width: 200px; border-radius: 30px;" src="./images/Splash.png">
+                <button id="start-game" style="position: absolute; bottom: 10px; left: 35%; transform: translateX(-50%); width: 70px; padding: 10px; background-color: rgba(0, 0, 0, 0.7); color: white; border: none; border-radius: 10px; cursor: pointer;">Play!</button>
+                <button id="select-folder" style="position: absolute; bottom: 10px; left: 65%; transform: translateX(-50%); padding: 10px; background-color: rgba(0, 0, 0, 0.7); color: white; border: none; border-radius: 10px; cursor: pointer;"><i class="fa-solid fa-folder"></i></button>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+
+    <script>
+        const downloadButton = document.getElementById('download-button');
+        const progressBar = document.getElementById('progress-bar');
+
+        document.getElementById('select-folder').addEventListener('click', () => {
+            window.electron.selectfolder();
+        });
+
+        document.getElementById('start-game').addEventListener('click', () => {
+            window.electron.openshell();
+        });
+
+        document.getElementById('claimvbucks').addEventListener('click', function() {
+            window.electron.openVbucksExternal();
+        });
+    </script>    
+</body>
+</html>
