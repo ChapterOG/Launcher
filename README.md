@@ -4,6 +4,8 @@ Hey there! Here is the source code of the Project Chapter OG launcher. We try to
 
 We simply ask one thing: **Do not skid our launcher.**
 
+**I did not include the Visual Studio Code files for the launcher backend. They aren't needed and you can figure out how to make your own launcher**
+
 CREDITS:
 
 ```
