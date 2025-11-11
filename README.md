@@ -6,7 +6,7 @@ We simply ask one thing: **Do not skid our launcher.**
 
 **I did not include the Visual Studio Code files for the launcher backend. They aren't needed and you can figure out how to make your own launcher**
 
-Lastest Version: 2.2
+Lastest Version: 2.2A
 
 CREDITS:
 
