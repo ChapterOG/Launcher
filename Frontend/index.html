@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     const text = await response.text();
-    const currentVersion = "2.1";
+    const currentVersion = "2.2";
 
     if (text.trim() === currentVersion) {
       console.log("Version up to date!");
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         document.getElementById('check-screen').style.display = "none";
       }, 2000);
     } else {
-      document.getElementById('checkversiontext').textContent = `Incorrect launcher version! Please upgrade to the latest version in our discord server! https://chapterog.com/`;
+      document.getElementById('checkversiontext').textContent = `Incorrect launcher version! Please upgrade to the latest version in our discord server! https://discord.gg/aQkhEXJQjM`;
       closeAppAndRunInstaller();
     }
 

@@ -34,7 +34,7 @@ async function setActivity() {
 
   rpc.setActivity({
     details: 'Project Chapter OG Launcher',
-    state: 'https://chapterog.com',
+    state: 'https://discord.gg/aQkhEXJQjM',
     startTimestamp: Date.now(),
     largeImageKey: 'projectchapterog',
     largeImageText: 'Large Image Text',
@@ -142,11 +142,11 @@ ipcMain.on('logout-user', async (event) => {
 });
 
 ipcMain.on('openDiscordExternal', (event) => {
-  shell.openExternal('https://backend.chapterog.com/api/v1/discord/auth')
+  shell.openExternal('https://backend.roban.me/api/v1/discord/auth')
 });
 
 ipcMain.on('openVbucksExternal', (event) => {
-  shell.openExternal('https://backend.chapterog.com/v1/launcher/claimvbucks')
+  shell.openExternal('https://backend.roban.me/v1/launcher/claimvbucks')
 });
 
 ipcMain.on('download-file', async (event, args) => {
